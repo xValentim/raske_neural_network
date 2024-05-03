@@ -13,66 +13,68 @@ O Raske é uma linguagem de programação desenvolvida especificamente para simp
 ## EBNF
 
 ```ebnf
+NEURAL_NETWORK   = "neural_network", '{', BLOCK, '}' ;
+BLOCK = { STATEMENT } ;
+STATEMENT        = { "λ" | ASSIGNMENT | PRINT | WHILE | IF  | ADD_INPUT_LAYER |  ADD_DENSE_LAYER | ADD_CONV_LAYER | ADD_MAXPOOLING_LAYER | ADD_BATCH_NORMALIZATION_LAYER | ADD_DROPOUT_LAYER }, "\n" ;
+ASSIGNMENT       = IDENTIFIER, '=', EXPRESSION ;
+PRINT            = "print", '(', EXPRESSION, ')' ;
+WHILE            = "while", "(", BOOL_EXP, ")", "{", "\n", { (STATEMENT)}, "}" ;
+IF = "if", "(", BOOL_EXP, ")", "{", { STATEMENT }, "}", [ "else", "{", { STATEMENT }, "}" ] ;
 
-BLOCK           ::= '{' STATEMENT '}';
-STATEMENT       ::= ( "λ" | ASSIGNMENT | PRINT | WHILE | IF | NEURAL_NETWORK | ADD_LAYER ), "\n" ;
-ASSIGNMENT      ::= IDENTIFIER '=' EXPRESSION ;
-PRINT           ::= "print" '(' EXPRESSION ')' ;
-WHILE           ::= "while" BOOL_EXP "do" "\n" "λ" '{' STATEMENT '}', "end" ;
-IF              ::= "if" BOOL_EXP "then" "\n" "λ" '{' STATEMENT '}', ( "λ" | "else" "\n" "λ" '{' STATEMENT '}' ), "end" ;
-NEURAL_NETWORK ::= "neural_network" '{' '}' ;
-ADD_LAYER       ::= "add_layer" '(' LAYER_TYPE, LAYER_PARAMETERS ')' ';' ;
-LAYER_TYPE      ::= "input_layer" | "hidden_layer" | "output_layer" | "convolutional_layer" | ... ;
-LAYER_PARAMETERS ::= PARAMETER | PARAMETER ',' LAYER_PARAMETERS ;
-PARAMETER       ::= PARAM_NAME '=' PARAM_VALUE ;
-PARAM_NAME      ::= "neurons" | "activation_function" | "kernel_size" | ... ;
-PARAM_VALUE     ::= NUMBER | STRING | ... ;
-BOOL_EXP        ::= BOOL_TERM ('or' BOOL_TERM)* ;
-BOOL_TERM       ::= REL_EXP ('and' REL_EXP)* ;
-REL_EXP         ::= EXPRESSION (REL_OP EXPRESSION)* ;
-EXPRESSIION     ::= TERM ('+' TERM | '-' TERM)* ;
-TERM            ::= FACTOR ('*' FACTOR | '/' FACTOR)* ;
-FACTOR          ::= NUMBER | IDENTIFIER | ('+' | '-' | 'not') FACTOR | '(' EXPRESSION ')' | "read" '(' ')' ;
-IDENTIFIER      ::= LETTER (LETTER | DIGIT | '_')* ;
-NUMBER          ::= DIGIT+ ;
-LETTER          ::= ('a' ... 'z' | 'A' ... 'Z') ;
-DIGIT           ::= ('0' ... '9') ;
-REL_OP          ::= '==' | '>' | '<' ;
+ACTIVATION = "relu" | "sigmoid" | "softmax" | "tanh" | "linear";
+ADD_INPUT_LAYER = "add_input_layer", "(", NUMBER, ("λ"| NUMBER,),")";
+ADD_DENSE_LAYER = "add_dense_layer", "(", NUMBER, ACTIVATION,")";
+ADD_CONV_LAYER = "add_conv_layer", "(", NUMBER, NUMBER, NUMBER, ACTIVATION,")";
+ADD_MAXPOOLING_LAYER = "add_maxpooling_layer", "(", NUMBER,")";
+ADD_BATCH_NORMALIZATION_LAYER = "add_batch_normalization_layer", "(", ")";
+ADD_DROPOUT_LAYER = "add_dropout_layer" , "(", NUMBER, ")";
+
+BOOL_EXP    = BOOL_TERM, { ("or"), BOOL_TERM };
+BOOL_TERM = REL_EXP, { ("and"), REL_EXP } ;
+REL_EXP = EXPRESSION, { ("==" | ">" | "<"), EXPRESSION } ;
+EXPRESSION = TERM, { ("+" | "-"), TERM } ;
+TERM = FACTOR, { ("*" | "/"), FACTOR } ;
+FACTOR = NUMBER | IDENTIFIER | (("+" | "-" | "not"), FACTOR ) | "(", EXPRESSION, ")" | "read", "(", ")" ;
+IDENTIFIER = LETTER, { LETTER | DIGIT | "_" } ;
+IDENTIFIER = LETTER, { LETTER | DIGIT | "_" } ;
+NUMBER = DIGIT, { DIGIT } ;
+LETTER = ( "a" | "..." | "z" | "A" | "..." | "Z" ) ;
+DIGIT = '0' | '1' | '...' | '9';
+
 
 ```
+
+### Diagrama sintático
+
+![Diagrama Sintático](imgs/diagram.png)
 
 ## Exemplo de uso
 
 ```C
 
 neural_network {
-    // Camada de entrada
-    add_layer('input', 784);
-
-    // Camadas ocultas
-    int i = 0;
-    while (i < 3) {
-        if (i % 2 == 0) {
-            add_layer('dense', 128, 'relu');
-        } else {
-            add_layer('dense', 64, 'relu');
-        }
-        add_layer('dropout', 0.25); // Dropout para regularização
-        i = i + 1;
+    add_input_layer(28, 28)
+    i = 0
+    while(i < 2){
+        add_conv_layer(32, 3, 3, relu)
+        add_maxpooling_layer(2)
+        add_batch_normalization_layer()
+        i = i + 1
     }
+    
+    add_dropout_layer(0.3)
 
-    // Mais camadas ocultas
-    i = 0;
-    while (i < 2) {
-        add_layer('dense', 32, 'relu');
-        if (i == 1) {
-            add_layer('dropout', 0.5); // Dropout mais agressivo para regularização
+    j = 0
+    while(j < 5){
+        if (j > 2){
+            add_dense_layer(256, relu)
         }
-        i = i + 1;
+        else{
+            add_dense_layer(128, relu)
+        }
+        j = j + 1
     }
-
-    // Camada de saída
-    add_layer('output', 10, 'softmax');
+    add_dense_layer(10, softmax)
 }
 
 
