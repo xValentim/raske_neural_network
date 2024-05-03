@@ -54,24 +54,29 @@ extern int yydebug;
     YYEOF = 0,                     /* "end of file"  */
     YYerror = 256,                 /* error  */
     YYUNDEF = 257,                 /* "invalid token"  */
-    NEURAL_NETWORK = 258,          /* NEURAL_NETWORK  */
-    OPEN_BRACE = 259,              /* OPEN_BRACE  */
-    CLOSE_BRACE = 260,             /* CLOSE_BRACE  */
-    ASSIGN = 261,                  /* ASSIGN  */
-    PRINT = 262,                   /* PRINT  */
-    WHILE = 263,                   /* WHILE  */
-    IF = 264,                      /* IF  */
-    ADD_INPUT_LAYER = 265,         /* ADD_INPUT_LAYER  */
-    ADD_DENSE_LAYER = 266,         /* ADD_DENSE_LAYER  */
-    ADD_CONV_LAYER = 267,          /* ADD_CONV_LAYER  */
-    ADD_MAXPOOLING_LAYER = 268,    /* ADD_MAXPOOLING_LAYER  */
-    ADD_BATCH_NORMALIZATION_LAYER = 269, /* ADD_BATCH_NORMALIZATION_LAYER  */
-    ADD_DROPOUT_LAYER = 270,       /* ADD_DROPOUT_LAYER  */
-    ACTIVATION = 271,              /* ACTIVATION  */
-    NUMBER = 272,                  /* NUMBER  */
-    IDENTIFIER_TOKEN = 273,        /* IDENTIFIER_TOKEN  */
-    ASSIGNMENT = 274,              /* ASSIGNMENT  */
-    ELSE = 275                     /* ELSE  */
+    IDENTIFIER = 258,              /* IDENTIFIER  */
+    NUMBER = 259,                  /* NUMBER  */
+    ACTIVATION = 260,              /* ACTIVATION  */
+    NEURAL_NETWORK = 261,          /* NEURAL_NETWORK  */
+    OPEN_BRACE = 262,              /* OPEN_BRACE  */
+    CLOSE_BRACE = 263,             /* CLOSE_BRACE  */
+    PRINT = 264,                   /* PRINT  */
+    WHILE = 265,                   /* WHILE  */
+    IF = 266,                      /* IF  */
+    ELSE = 267,                    /* ELSE  */
+    ADD_INPUT_LAYER = 268,         /* ADD_INPUT_LAYER  */
+    ADD_DENSE_LAYER = 269,         /* ADD_DENSE_LAYER  */
+    ADD_CONV_LAYER = 270,          /* ADD_CONV_LAYER  */
+    ADD_MAXPOOLING_LAYER = 271,    /* ADD_MAXPOOLING_LAYER  */
+    ADD_BATCH_NORMALIZATION_LAYER = 272, /* ADD_BATCH_NORMALIZATION_LAYER  */
+    ADD_DROPOUT_LAYER = 273,       /* ADD_DROPOUT_LAYER  */
+    ASSIGN = 274,                  /* ASSIGN  */
+    OPEN_PAREN = 275,              /* OPEN_PAREN  */
+    CLOSE_PAREN = 276,             /* CLOSE_PAREN  */
+    COMMA = 277,                   /* COMMA  */
+    REL_OP = 278,                  /* REL_OP  */
+    ADD_OP = 279,                  /* ADD_OP  */
+    MUL_OP = 280                   /* MUL_OP  */
   };
   typedef enum yytokentype yytoken_kind_t;
 #endif
@@ -80,13 +85,12 @@ extern int yydebug;
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 union YYSTYPE
 {
-#line 13 "parser.y"
+#line 7 "parser.y"
 
     int num;
-    char* activation;
-    char* identifier;
+    char *str;
 
-#line 90 "parser.tab.h"
+#line 94 "parser.tab.h"
 
 };
 typedef union YYSTYPE YYSTYPE;

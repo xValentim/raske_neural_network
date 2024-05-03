@@ -15,11 +15,11 @@ O Raske é uma linguagem de programação desenvolvida especificamente para simp
 ```ebnf
 NEURAL_NETWORK   = "neural_network", '{', BLOCK, '}' ;
 BLOCK = { STATEMENT } ;
-STATEMENT        = { "λ" | ASSIGNMENT | PRINT | WHILE | IF  | ADD_INPUT_LAYER |  ADD_DENSE_LAYER | ADD_CONV_LAYER | ADD_MAXPOOLING_LAYER | ADD_BATCH_NORMALIZATION_LAYER | ADD_DROPOUT_LAYER }, "\n" ;
+STATEMENT        = { ASSIGNMENT | PRINT | WHILE | IF  | ADD_INPUT_LAYER |  ADD_DENSE_LAYER | ADD_CONV_LAYER | ADD_MAXPOOLING_LAYER | ADD_BATCH_NORMALIZATION_LAYER | ADD_DROPOUT_LAYER }, "\n" ;
 ASSIGNMENT       = IDENTIFIER, '=', EXPRESSION ;
 PRINT            = "print", '(', EXPRESSION, ')' ;
-WHILE            = "while", "(", BOOL_EXP, ")", "{", "\n", { (STATEMENT)}, "}" ;
-IF = "if", "(", BOOL_EXP, ")", "{", { STATEMENT }, "}", [ "else", "{", { STATEMENT }, "}" ] ;
+WHILE            = "while", "(", REL_EXP, ")", "{", "\n", { (STATEMENT)}, "}" ;
+IF = "if", "(", REL_EXP, ")", "{", { STATEMENT }, "}", [ "else", "{", { STATEMENT }, "}" ] ;
 
 ACTIVATION = "relu" | "sigmoid" | "softmax" | "tanh" | "linear";
 ADD_INPUT_LAYER = "add_input_layer", "(", NUMBER, ("λ"| NUMBER,),")";
@@ -29,18 +29,14 @@ ADD_MAXPOOLING_LAYER = "add_maxpooling_layer", "(", NUMBER,")";
 ADD_BATCH_NORMALIZATION_LAYER = "add_batch_normalization_layer", "(", ")";
 ADD_DROPOUT_LAYER = "add_dropout_layer" , "(", NUMBER, ")";
 
-BOOL_EXP    = BOOL_TERM, { ("or"), BOOL_TERM };
-BOOL_TERM = REL_EXP, { ("and"), REL_EXP } ;
 REL_EXP = EXPRESSION, { ("==" | ">" | "<"), EXPRESSION } ;
 EXPRESSION = TERM, { ("+" | "-"), TERM } ;
 TERM = FACTOR, { ("*" | "/"), FACTOR } ;
-FACTOR = NUMBER | IDENTIFIER | (("+" | "-" | "not"), FACTOR ) | "(", EXPRESSION, ")" | "read", "(", ")" ;
-IDENTIFIER = LETTER, { LETTER | DIGIT | "_" } ;
+FACTOR = NUMBER | IDENTIFIER | (("+" | "-" | "not"), FACTOR ) | "(", EXPRESSION, ")" ;
 IDENTIFIER = LETTER, { LETTER | DIGIT | "_" } ;
 NUMBER = DIGIT, { DIGIT } ;
 LETTER = ( "a" | "..." | "z" | "A" | "..." | "Z" ) ;
 DIGIT = '0' | '1' | '...' | '9';
-
 
 ```
 
