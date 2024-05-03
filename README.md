@@ -77,7 +77,4 @@ neural_network {
     add_dense_layer(10, softmax)
 }
 
-
-
-
 ```
