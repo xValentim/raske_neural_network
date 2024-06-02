@@ -11,7 +11,7 @@ void yyerror(const char *s);
 
 %token <str> IDENTIFIER NUMBER ACTIVATION
 %token NEURAL_NETWORK OPEN_BRACE CLOSE_BRACE PRINT WHILE IF ELSE
-%token ADD_INPUT_LAYER ADD_DENSE_LAYER ADD_CONV_LAYER ADD_MAXPOOLING_LAYER ADD_BATCH_NORMALIZATION_LAYER ADD_DROPOUT_LAYER
+%token ADD_INPUT_LAYER ADD_DENSE_LAYER ADD_CONV_LAYER ADD_MAXPOOLING_LAYER ADD_BATCH_NORMALIZATION_LAYER ADD_DROPOUT_LAYER ADD_FLATTEN_LAYER LOCAL
 %token ASSIGN OPEN_PAREN CLOSE_PAREN COMMA REL_OP ADD_OP MUL_OP
 
 %type <str> expression
@@ -32,6 +32,7 @@ statement:
   | while
   | if
   | add_layer
+  | local_declaration
   ;
 
 assignment: IDENTIFIER ASSIGN expression;
@@ -51,6 +52,13 @@ add_layer:
   | ADD_MAXPOOLING_LAYER OPEN_PAREN expression CLOSE_PAREN { printf("Added maxpooling layer.\n");}
   | ADD_BATCH_NORMALIZATION_LAYER OPEN_PAREN CLOSE_PAREN { printf("Added batch normalization layer.\n");}
   | ADD_DROPOUT_LAYER OPEN_PAREN expression CLOSE_PAREN { printf("Added dropout layer.\n");}
+  | ADD_FLATTEN_LAYER OPEN_PAREN CLOSE_PAREN { printf("Added flatten layer.\n");}
+  
+  ;
+
+local_declaration:
+    LOCAL IDENTIFIER { printf("Declared local variable %s.\n", $2); }
+  | LOCAL IDENTIFIER ASSIGN expression { printf("Declared local variable %s with initial value.\n", $2); }
   ;
 
 expression:

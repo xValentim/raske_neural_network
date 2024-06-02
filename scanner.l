@@ -14,6 +14,7 @@ whitespace  [ \t\r\n]+
 "}"                                             { return CLOSE_BRACE; }
 "print"                                         { return PRINT; }
 "while"                                         { return WHILE; }
+"local"                                         { return LOCAL; }
 "if"                                            { return IF; }
 "else"                                          { return ELSE; }
 "add_input_layer"                               { return ADD_INPUT_LAYER; }
@@ -22,6 +23,7 @@ whitespace  [ \t\r\n]+
 "add_maxpooling_layer"                          { return ADD_MAXPOOLING_LAYER; }
 "add_batch_normalization_layer"                 { return ADD_BATCH_NORMALIZATION_LAYER; }
 "add_dropout_layer"                             { return ADD_DROPOUT_LAYER; }
+"add_flatten_layer"                             { return ADD_FLATTEN_LAYER; }
 "relu"|"sigmoid"|"softmax"|"tanh"|"linear"      { return ACTIVATION; }
 "="                                             { return ASSIGN; }
 "("                                             { return OPEN_PAREN; }

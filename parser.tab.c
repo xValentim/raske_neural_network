@@ -120,23 +120,26 @@ enum yysymbol_kind_t
   YYSYMBOL_ADD_MAXPOOLING_LAYER = 16,      /* ADD_MAXPOOLING_LAYER  */
   YYSYMBOL_ADD_BATCH_NORMALIZATION_LAYER = 17, /* ADD_BATCH_NORMALIZATION_LAYER  */
   YYSYMBOL_ADD_DROPOUT_LAYER = 18,         /* ADD_DROPOUT_LAYER  */
-  YYSYMBOL_ASSIGN = 19,                    /* ASSIGN  */
-  YYSYMBOL_OPEN_PAREN = 20,                /* OPEN_PAREN  */
-  YYSYMBOL_CLOSE_PAREN = 21,               /* CLOSE_PAREN  */
-  YYSYMBOL_COMMA = 22,                     /* COMMA  */
-  YYSYMBOL_REL_OP = 23,                    /* REL_OP  */
-  YYSYMBOL_ADD_OP = 24,                    /* ADD_OP  */
-  YYSYMBOL_MUL_OP = 25,                    /* MUL_OP  */
-  YYSYMBOL_YYACCEPT = 26,                  /* $accept  */
-  YYSYMBOL_neural_network = 27,            /* neural_network  */
-  YYSYMBOL_block = 28,                     /* block  */
-  YYSYMBOL_statement = 29,                 /* statement  */
-  YYSYMBOL_assignment = 30,                /* assignment  */
-  YYSYMBOL_print = 31,                     /* print  */
-  YYSYMBOL_while = 32,                     /* while  */
-  YYSYMBOL_if = 33,                        /* if  */
-  YYSYMBOL_add_layer = 34,                 /* add_layer  */
-  YYSYMBOL_expression = 35                 /* expression  */
+  YYSYMBOL_ADD_FLATTEN_LAYER = 19,         /* ADD_FLATTEN_LAYER  */
+  YYSYMBOL_LOCAL = 20,                     /* LOCAL  */
+  YYSYMBOL_ASSIGN = 21,                    /* ASSIGN  */
+  YYSYMBOL_OPEN_PAREN = 22,                /* OPEN_PAREN  */
+  YYSYMBOL_CLOSE_PAREN = 23,               /* CLOSE_PAREN  */
+  YYSYMBOL_COMMA = 24,                     /* COMMA  */
+  YYSYMBOL_REL_OP = 25,                    /* REL_OP  */
+  YYSYMBOL_ADD_OP = 26,                    /* ADD_OP  */
+  YYSYMBOL_MUL_OP = 27,                    /* MUL_OP  */
+  YYSYMBOL_YYACCEPT = 28,                  /* $accept  */
+  YYSYMBOL_neural_network = 29,            /* neural_network  */
+  YYSYMBOL_block = 30,                     /* block  */
+  YYSYMBOL_statement = 31,                 /* statement  */
+  YYSYMBOL_assignment = 32,                /* assignment  */
+  YYSYMBOL_print = 33,                     /* print  */
+  YYSYMBOL_while = 34,                     /* while  */
+  YYSYMBOL_if = 35,                        /* if  */
+  YYSYMBOL_add_layer = 36,                 /* add_layer  */
+  YYSYMBOL_local_declaration = 37,         /* local_declaration  */
+  YYSYMBOL_expression = 38                 /* expression  */
 };
 typedef enum yysymbol_kind_t yysymbol_kind_t;
 
@@ -464,19 +467,19 @@ union yyalloc
 /* YYFINAL -- State number of the termination state.  */
 #define YYFINAL  4
 /* YYLAST -- Last index in YYTABLE.  */
-#define YYLAST   132
+#define YYLAST   145
 
 /* YYNTOKENS -- Number of terminals.  */
-#define YYNTOKENS  26
+#define YYNTOKENS  28
 /* YYNNTS -- Number of nonterminals.  */
-#define YYNNTS  10
+#define YYNNTS  11
 /* YYNRULES -- Number of rules.  */
-#define YYNRULES  26
+#define YYNRULES  30
 /* YYNSTATES -- Number of states.  */
-#define YYNSTATES  80
+#define YYNSTATES  88
 
 /* YYMAXUTOK -- Last valid token kind.  */
-#define YYMAXUTOK   280
+#define YYMAXUTOK   282
 
 
 /* YYTRANSLATE(TOKEN-NUM) -- Symbol number corresponding to TOKEN-NUM
@@ -518,7 +521,7 @@ static const yytype_int8 yytranslate[] =
        2,     2,     2,     2,     2,     2,     1,     2,     3,     4,
        5,     6,     7,     8,     9,    10,    11,    12,    13,    14,
       15,    16,    17,    18,    19,    20,    21,    22,    23,    24,
-      25
+      25,    26,    27
 };
 
 #if YYDEBUG
@@ -526,8 +529,9 @@ static const yytype_int8 yytranslate[] =
 static const yytype_int8 yyrline[] =
 {
        0,    20,    20,    25,    26,    30,    31,    32,    33,    34,
-      37,    39,    41,    43,    44,    47,    48,    49,    50,    51,
-      52,    53,    57,    58,    59,    60,    61
+      35,    38,    40,    42,    44,    45,    48,    49,    50,    51,
+      52,    53,    54,    55,    60,    61,    65,    66,    67,    68,
+      69
 };
 #endif
 
@@ -547,10 +551,11 @@ static const char *const yytname[] =
   "ACTIVATION", "NEURAL_NETWORK", "OPEN_BRACE", "CLOSE_BRACE", "PRINT",
   "WHILE", "IF", "ELSE", "ADD_INPUT_LAYER", "ADD_DENSE_LAYER",
   "ADD_CONV_LAYER", "ADD_MAXPOOLING_LAYER",
-  "ADD_BATCH_NORMALIZATION_LAYER", "ADD_DROPOUT_LAYER", "ASSIGN",
-  "OPEN_PAREN", "CLOSE_PAREN", "COMMA", "REL_OP", "ADD_OP", "MUL_OP",
-  "$accept", "neural_network", "block", "statement", "assignment", "print",
-  "while", "if", "add_layer", "expression", YY_NULLPTR
+  "ADD_BATCH_NORMALIZATION_LAYER", "ADD_DROPOUT_LAYER",
+  "ADD_FLATTEN_LAYER", "LOCAL", "ASSIGN", "OPEN_PAREN", "CLOSE_PAREN",
+  "COMMA", "REL_OP", "ADD_OP", "MUL_OP", "$accept", "neural_network",
+  "block", "statement", "assignment", "print", "while", "if", "add_layer",
+  "local_declaration", "expression", YY_NULLPTR
 };
 
 static const char *
@@ -560,7 +565,7 @@ yysymbol_name (yysymbol_kind_t yysymbol)
 }
 #endif
 
-#define YYPACT_NINF (-52)
+#define YYPACT_NINF (-56)
 
 #define yypact_value_is_default(Yyn) \
   ((Yyn) == YYPACT_NINF)
@@ -572,16 +577,17 @@ yysymbol_name (yysymbol_kind_t yysymbol)
 
 /* YYPACT[STATE-NUM] -- Index in YYTABLE of the portion describing
    STATE-NUM.  */
-static const yytype_int8 yypact[] =
+static const yytype_int16 yypact[] =
 {
-       1,    10,    25,   -52,   -52,    23,     8,   -52,     9,    15,
-      26,    31,    47,    63,    76,    81,    86,   -52,   -52,   -52,
-     -52,   -52,   -52,    40,    40,    40,    40,    40,    40,    40,
-      40,    70,    40,   -52,   -52,   100,    -5,    69,    74,   -10,
-      37,    53,    79,   -52,    84,    40,    40,    40,   -52,   104,
-     119,   -52,    40,   122,    40,   -52,   -52,   100,   100,   100,
-     -52,   -52,    89,   107,    93,    39,    55,   -52,   -52,    40,
-     -52,   117,    97,   123,   126,   -52,   111,    71,   -52,   -52
+       6,    22,    31,   -56,   -56,    27,    12,   -56,    17,    35,
+      53,    71,    86,    91,    96,   101,   112,   113,    46,   -56,
+     -56,   -56,   -56,   -56,   -56,   -56,    48,    48,    48,    48,
+      48,    48,    48,    48,    80,    48,   114,   115,   -56,   -56,
+     106,   -16,    79,    84,    -8,    -4,    43,    89,   -56,    94,
+     -56,    48,    48,    48,    48,   -56,   131,   132,   -56,    48,
+     135,    48,   -56,   -56,   106,   106,   106,   106,   -56,   -56,
+      99,   118,    61,    45,    63,   -56,   -56,    48,   -56,   130,
+     103,   136,   139,   -56,   122,    81,   -56,   -56
 };
 
 /* YYDEFACT[STATE-NUM] -- Default reduction number in state STATE-NUM.
@@ -590,25 +596,28 @@ static const yytype_int8 yypact[] =
 static const yytype_int8 yydefact[] =
 {
        0,     0,     0,     3,     1,     0,     0,     2,     0,     0,
-       0,     0,     0,     0,     0,     0,     0,     4,     5,     6,
-       7,     8,     9,     0,     0,     0,     0,     0,     0,     0,
-       0,     0,     0,    23,    22,    10,     0,     0,     0,     0,
-       0,     0,     0,    20,     0,     0,     0,     0,    11,     0,
-       0,    15,     0,     0,     0,    19,    21,    26,    24,    25,
-       3,     3,     0,     0,     0,     0,     0,    16,    17,     0,
-      12,    13,     0,     0,     0,     3,     0,     0,    18,    14
+       0,     0,     0,     0,     0,     0,     0,     0,     0,     4,
+       5,     6,     7,     8,     9,    10,     0,     0,     0,     0,
+       0,     0,     0,     0,     0,     0,     0,    24,    27,    26,
+      11,     0,     0,     0,     0,     0,     0,     0,    21,     0,
+      23,     0,     0,     0,     0,    12,     0,     0,    16,     0,
+       0,     0,    20,    22,    25,    30,    28,    29,     3,     3,
+       0,     0,     0,     0,     0,    17,    18,     0,    13,    14,
+       0,     0,     0,     3,     0,     0,    19,    15
 };
 
 /* YYPGOTO[NTERM-NUM].  */
 static const yytype_int8 yypgoto[] =
 {
-     -52,   -52,   -51,   -52,   -52,   -52,   -52,   -52,   -52,   -24
+     -56,   -56,   -55,   -56,   -56,   -56,   -56,   -56,   -56,   -56,
+     -27
 };
 
 /* YYDEFGOTO[NTERM-NUM].  */
 static const yytype_int8 yydefgoto[] =
 {
-       0,     2,     5,    17,    18,    19,    20,    21,    22,    35
+       0,     2,     5,    19,    20,    21,    22,    23,    24,    25,
+      40
 };
 
 /* YYTABLE[YYPACT[STATE-NUM]] -- What to do in state STATE-NUM.  If
@@ -616,68 +625,73 @@ static const yytype_int8 yydefgoto[] =
    number is the opposite.  If YYTABLE_NINF, syntax error.  */
 static const yytype_int8 yytable[] =
 {
-      36,    37,    38,    39,    40,    41,    42,     1,    44,    65,
-      66,    51,    52,    45,    46,    47,    48,     3,    45,    46,
-      47,    57,    58,    59,    77,     4,     6,    23,    62,    24,
-      64,     7,     8,     9,    10,    25,    11,    12,    13,    14,
-      15,    16,     6,    33,    34,    72,    26,    70,     8,     9,
-      10,    27,    11,    12,    13,    14,    15,    16,     6,    53,
-      45,    46,    47,    71,     8,     9,    10,    28,    11,    12,
-      13,    14,    15,    16,     6,    54,    45,    46,    47,    79,
-       8,     9,    10,    29,    11,    12,    13,    14,    15,    16,
-      49,    43,    45,    46,    47,    50,    30,    45,    46,    47,
-      55,    31,    45,    46,    47,    56,    32,    45,    46,    47,
-      67,    60,    45,    46,    47,    69,    45,    46,    47,    74,
-      45,    46,    47,    45,    46,    47,    61,    63,    68,    73,
-      75,    76,    78
+      41,    42,    43,    44,    45,    46,    47,    55,    49,    52,
+      53,    54,     1,    73,    74,    58,    59,    52,    53,    54,
+      60,    52,    53,    54,    64,    65,    66,    67,    85,     3,
+       6,     4,    70,    26,    72,     7,     8,     9,    10,    27,
+      11,    12,    13,    14,    15,    16,    17,    18,     6,    37,
+      80,    38,    39,    78,     8,     9,    10,    28,    11,    12,
+      13,    14,    15,    16,    17,    18,     6,    61,    52,    53,
+      54,    79,     8,     9,    10,    29,    11,    12,    13,    14,
+      15,    16,    17,    18,     6,    77,    52,    53,    54,    87,
+       8,     9,    10,    30,    11,    12,    13,    14,    15,    16,
+      17,    18,    56,    48,    52,    53,    54,    57,    31,    52,
+      53,    54,    62,    32,    52,    53,    54,    63,    33,    52,
+      53,    54,    75,    34,    52,    53,    54,    82,    52,    53,
+      54,    52,    53,    54,    35,    36,    51,    50,    68,    69,
+      71,    76,    81,    83,    84,    86
 };
 
 static const yytype_int8 yycheck[] =
 {
-      24,    25,    26,    27,    28,    29,    30,     6,    32,    60,
-      61,    21,    22,    23,    24,    25,    21,     7,    23,    24,
-      25,    45,    46,    47,    75,     0,     3,    19,    52,    20,
-      54,     8,     9,    10,    11,    20,    13,    14,    15,    16,
-      17,    18,     3,     3,     4,    69,    20,     8,     9,    10,
-      11,    20,    13,    14,    15,    16,    17,    18,     3,    22,
-      23,    24,    25,     8,     9,    10,    11,    20,    13,    14,
-      15,    16,    17,    18,     3,    22,    23,    24,    25,     8,
-       9,    10,    11,    20,    13,    14,    15,    16,    17,    18,
-      21,    21,    23,    24,    25,    21,    20,    23,    24,    25,
-      21,    20,    23,    24,    25,    21,    20,    23,    24,    25,
-      21,     7,    23,    24,    25,    22,    23,    24,    25,    22,
-      23,    24,    25,    23,    24,    25,     7,     5,    21,    12,
-       7,     5,    21
+      27,    28,    29,    30,    31,    32,    33,    23,    35,    25,
+      26,    27,     6,    68,    69,    23,    24,    25,    26,    27,
+      24,    25,    26,    27,    51,    52,    53,    54,    83,     7,
+       3,     0,    59,    21,    61,     8,     9,    10,    11,    22,
+      13,    14,    15,    16,    17,    18,    19,    20,     3,     3,
+      77,     3,     4,     8,     9,    10,    11,    22,    13,    14,
+      15,    16,    17,    18,    19,    20,     3,    24,    25,    26,
+      27,     8,     9,    10,    11,    22,    13,    14,    15,    16,
+      17,    18,    19,    20,     3,    24,    25,    26,    27,     8,
+       9,    10,    11,    22,    13,    14,    15,    16,    17,    18,
+      19,    20,    23,    23,    25,    26,    27,    23,    22,    25,
+      26,    27,    23,    22,    25,    26,    27,    23,    22,    25,
+      26,    27,    23,    22,    25,    26,    27,    24,    25,    26,
+      27,    25,    26,    27,    22,    22,    21,    23,     7,     7,
+       5,    23,    12,     7,     5,    23
 };
 
 /* YYSTOS[STATE-NUM] -- The symbol kind of the accessing symbol of
    state STATE-NUM.  */
 static const yytype_int8 yystos[] =
 {
-       0,     6,    27,     7,     0,    28,     3,     8,     9,    10,
-      11,    13,    14,    15,    16,    17,    18,    29,    30,    31,
-      32,    33,    34,    19,    20,    20,    20,    20,    20,    20,
-      20,    20,    20,     3,     4,    35,    35,    35,    35,    35,
-      35,    35,    35,    21,    35,    23,    24,    25,    21,    21,
-      21,    21,    22,    22,    22,    21,    21,    35,    35,    35,
-       7,     7,    35,     5,    35,    28,    28,    21,    21,    22,
-       8,     8,    35,    12,    22,     7,     5,    28,    21,     8
+       0,     6,    29,     7,     0,    30,     3,     8,     9,    10,
+      11,    13,    14,    15,    16,    17,    18,    19,    20,    31,
+      32,    33,    34,    35,    36,    37,    21,    22,    22,    22,
+      22,    22,    22,    22,    22,    22,    22,     3,     3,     4,
+      38,    38,    38,    38,    38,    38,    38,    38,    23,    38,
+      23,    21,    25,    26,    27,    23,    23,    23,    23,    24,
+      24,    24,    23,    23,    38,    38,    38,    38,     7,     7,
+      38,     5,    38,    30,    30,    23,    23,    24,     8,     8,
+      38,    12,    24,     7,     5,    30,    23,     8
 };
 
 /* YYR1[RULE-NUM] -- Symbol kind of the left-hand side of rule RULE-NUM.  */
 static const yytype_int8 yyr1[] =
 {
-       0,    26,    27,    28,    28,    29,    29,    29,    29,    29,
-      30,    31,    32,    33,    33,    34,    34,    34,    34,    34,
-      34,    34,    35,    35,    35,    35,    35
+       0,    28,    29,    30,    30,    31,    31,    31,    31,    31,
+      31,    32,    33,    34,    35,    35,    36,    36,    36,    36,
+      36,    36,    36,    36,    37,    37,    38,    38,    38,    38,
+      38
 };
 
 /* YYR2[RULE-NUM] -- Number of symbols on the right-hand side of rule RULE-NUM.  */
 static const yytype_int8 yyr2[] =
 {
        0,     2,     4,     0,     2,     1,     1,     1,     1,     1,
-       3,     4,     7,     7,    11,     4,     6,     6,    10,     4,
-       3,     4,     1,     1,     3,     3,     3
+       1,     3,     4,     7,     7,    11,     4,     6,     6,    10,
+       4,     3,     4,     3,     2,     4,     1,     1,     3,     3,
+       3
 };
 
 
@@ -1145,53 +1159,71 @@ yyreduce:
                 {
                     printf("Parsed a neural network definition.\n");
                 }
-#line 1149 "parser.tab.c"
+#line 1163 "parser.tab.c"
     break;
 
-  case 15: /* add_layer: ADD_INPUT_LAYER OPEN_PAREN expression CLOSE_PAREN  */
-#line 47 "parser.y"
-                                                      { printf("Added input layer.\n");}
-#line 1155 "parser.tab.c"
-    break;
-
-  case 16: /* add_layer: ADD_INPUT_LAYER OPEN_PAREN expression COMMA expression CLOSE_PAREN  */
+  case 16: /* add_layer: ADD_INPUT_LAYER OPEN_PAREN expression CLOSE_PAREN  */
 #line 48 "parser.y"
-                                                                       { printf("Added input layer.\n");}
-#line 1161 "parser.tab.c"
+                                                      { printf("Added input layer.\n");}
+#line 1169 "parser.tab.c"
     break;
 
-  case 17: /* add_layer: ADD_DENSE_LAYER OPEN_PAREN expression COMMA ACTIVATION CLOSE_PAREN  */
+  case 17: /* add_layer: ADD_INPUT_LAYER OPEN_PAREN expression COMMA expression CLOSE_PAREN  */
 #line 49 "parser.y"
-                                                                       { printf("Added dense layer.\n");}
-#line 1167 "parser.tab.c"
+                                                                       { printf("Added input layer.\n");}
+#line 1175 "parser.tab.c"
     break;
 
-  case 18: /* add_layer: ADD_CONV_LAYER OPEN_PAREN expression COMMA expression COMMA expression COMMA ACTIVATION CLOSE_PAREN  */
+  case 18: /* add_layer: ADD_DENSE_LAYER OPEN_PAREN expression COMMA ACTIVATION CLOSE_PAREN  */
 #line 50 "parser.y"
-                                                                                                        { printf("Added convolutional layer.\n");}
-#line 1173 "parser.tab.c"
+                                                                       { printf("Added dense layer.\n");}
+#line 1181 "parser.tab.c"
     break;
 
-  case 19: /* add_layer: ADD_MAXPOOLING_LAYER OPEN_PAREN expression CLOSE_PAREN  */
+  case 19: /* add_layer: ADD_CONV_LAYER OPEN_PAREN expression COMMA expression COMMA expression COMMA ACTIVATION CLOSE_PAREN  */
 #line 51 "parser.y"
-                                                           { printf("Added maxpooling layer.\n");}
-#line 1179 "parser.tab.c"
+                                                                                                        { printf("Added convolutional layer.\n");}
+#line 1187 "parser.tab.c"
     break;
 
-  case 20: /* add_layer: ADD_BATCH_NORMALIZATION_LAYER OPEN_PAREN CLOSE_PAREN  */
+  case 20: /* add_layer: ADD_MAXPOOLING_LAYER OPEN_PAREN expression CLOSE_PAREN  */
 #line 52 "parser.y"
-                                                         { printf("Added batch normalization layer.\n");}
-#line 1185 "parser.tab.c"
+                                                           { printf("Added maxpooling layer.\n");}
+#line 1193 "parser.tab.c"
     break;
 
-  case 21: /* add_layer: ADD_DROPOUT_LAYER OPEN_PAREN expression CLOSE_PAREN  */
+  case 21: /* add_layer: ADD_BATCH_NORMALIZATION_LAYER OPEN_PAREN CLOSE_PAREN  */
 #line 53 "parser.y"
+                                                         { printf("Added batch normalization layer.\n");}
+#line 1199 "parser.tab.c"
+    break;
+
+  case 22: /* add_layer: ADD_DROPOUT_LAYER OPEN_PAREN expression CLOSE_PAREN  */
+#line 54 "parser.y"
                                                         { printf("Added dropout layer.\n");}
-#line 1191 "parser.tab.c"
+#line 1205 "parser.tab.c"
+    break;
+
+  case 23: /* add_layer: ADD_FLATTEN_LAYER OPEN_PAREN CLOSE_PAREN  */
+#line 55 "parser.y"
+                                             { printf("Added flatten layer.\n");}
+#line 1211 "parser.tab.c"
+    break;
+
+  case 24: /* local_declaration: LOCAL IDENTIFIER  */
+#line 60 "parser.y"
+                     { printf("Declared local variable %s.\n", (yyvsp[0].str)); }
+#line 1217 "parser.tab.c"
+    break;
+
+  case 25: /* local_declaration: LOCAL IDENTIFIER ASSIGN expression  */
+#line 61 "parser.y"
+                                       { printf("Declared local variable %s with initial value.\n", (yyvsp[-2].str)); }
+#line 1223 "parser.tab.c"
     break;
 
 
-#line 1195 "parser.tab.c"
+#line 1227 "parser.tab.c"
 
       default: break;
     }
@@ -1384,7 +1416,7 @@ yyreturnlab:
   return yyresult;
 }
 
-#line 64 "parser.y"
+#line 72 "parser.y"
 
 int main(void) {
     yyparse();

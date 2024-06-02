@@ -70,13 +70,15 @@ extern int yydebug;
     ADD_MAXPOOLING_LAYER = 271,    /* ADD_MAXPOOLING_LAYER  */
     ADD_BATCH_NORMALIZATION_LAYER = 272, /* ADD_BATCH_NORMALIZATION_LAYER  */
     ADD_DROPOUT_LAYER = 273,       /* ADD_DROPOUT_LAYER  */
-    ASSIGN = 274,                  /* ASSIGN  */
-    OPEN_PAREN = 275,              /* OPEN_PAREN  */
-    CLOSE_PAREN = 276,             /* CLOSE_PAREN  */
-    COMMA = 277,                   /* COMMA  */
-    REL_OP = 278,                  /* REL_OP  */
-    ADD_OP = 279,                  /* ADD_OP  */
-    MUL_OP = 280                   /* MUL_OP  */
+    ADD_FLATTEN_LAYER = 274,       /* ADD_FLATTEN_LAYER  */
+    LOCAL = 275,                   /* LOCAL  */
+    ASSIGN = 276,                  /* ASSIGN  */
+    OPEN_PAREN = 277,              /* OPEN_PAREN  */
+    CLOSE_PAREN = 278,             /* CLOSE_PAREN  */
+    COMMA = 279,                   /* COMMA  */
+    REL_OP = 280,                  /* REL_OP  */
+    ADD_OP = 281,                  /* ADD_OP  */
+    MUL_OP = 282                   /* MUL_OP  */
   };
   typedef enum yytokentype yytoken_kind_t;
 #endif
@@ -90,7 +92,7 @@ union YYSTYPE
     int num;
     char *str;
 
-#line 94 "parser.tab.h"
+#line 96 "parser.tab.h"
 
 };
 typedef union YYSTYPE YYSTYPE;
