@@ -1,0 +1,5 @@
+neural_network{
+    add_input_layer(2)
+    add_dense_layer(64, linear)
+    add_dense_layer(2, softmax)
+}

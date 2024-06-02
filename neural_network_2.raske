@@ -1,0 +1,9 @@
+neural_network{
+    add_input_layer(2)
+    local i = 0
+    while (i < 5){
+        add_dense_layer(64, linear)
+        i = i + 1
+    }
+    add_dense_layer(1, sigmoid)
+}

@@ -1,0 +1,11 @@
+neural_network{
+    add_input_layer(28, 28)
+    local i = 0
+    while (i < 4) {
+        add_conv_layer(4, 4, 1, linear)
+        i = i + 1
+    }
+    add_flatten_layer()
+    add_dense_layer(64, linear)
+    add_dense_layer(2, softmax)
+}
