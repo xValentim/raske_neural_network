@@ -257,7 +257,6 @@ class FuncCall(Node):
         
         new_symbol_table = SymbolTable()
         for i in range(len(self.children)):
-            # print('func', func.children[i + 1].value.value, self.children[i].evaluate(symbol_table, func_table))
             new_symbol_table.create(func.children[i + 1].value.value)
             new_symbol_table.set(func.children[i + 1].value.value, self.children[i].evaluate(symbol_table, func_table))
         
@@ -402,7 +401,6 @@ class PrePro:
 class Tokenizer:
     def __init__(self, source: str):
         self.source = source
-        # print('len: ', len(self.source))
         self.position = 0
         self.actual = None
         self.aux_token = None
@@ -728,7 +726,6 @@ class Parser:
         return Block(Token('BLOCK', 'block'), result)
         
     def parse_statement(self):
-        # padding_symbol_table = SymbolTable()
         if self.actual_token.type == 'PRINT':
             self.actual_token = self.tokenizer.select_next()
             return Print(Token('PRINT', 'print'), [self.parse_bool_expression()])
@@ -974,7 +971,6 @@ class Parser:
         elif self.actual_token.type == 'WHILE':
             self.actual_token = self.tokenizer.select_next()
             
-            # ADDED
             if self.actual_token.type != 'LPAREN':
                 raise ValueError("Esperado '(' após while")
             self.actual_token = self.tokenizer.select_next()
@@ -984,9 +980,8 @@ class Parser:
             if self.actual_token.type != 'RPAREN':
                 raise ValueError("Esperado ')' após condição")
             self.actual_token = self.tokenizer.select_next()
-            # --------
             
-            # Changed
+            
             if self.actual_token.type != 'LBRACE':
                 raise ValueError("Esperado '{' após while")
             self.actual_token = self.tokenizer.select_next()
@@ -995,7 +990,6 @@ class Parser:
                 raise ValueError("Esperado 'EOL' após do")
             self.actual_token = self.tokenizer.select_next()
             
-            # Changed
             result_block = []
             while self.actual_token.type != 'RBRACE':
                 result_block.append(self.parse_statement())
@@ -1026,13 +1020,11 @@ class Parser:
                 raise ValueError("Esperado 'EOL' após then")
             self.actual_token = self.tokenizer.select_next()
             
-            # Precisa mudar mais aq
             result_block = []
             while self.actual_token.type != 'RBRACE':
                 result_block.append(self.parse_statement())
             block = Block(Token('BLOCK', 'block'), result_block)
             self.actual_token = self.tokenizer.select_next()
-            # print(self.actual_token.type, self.actual_token.value)
             
             if self.actual_token.type == 'ELSE':
                 self.actual_token = self.tokenizer.select_next()
@@ -1053,7 +1045,6 @@ class Parser:
                 
                 return If(Token('IF', 'if'), [condition, block, block_else])
             else:
-                # print(self.actual_token.type, self.actual_token.value)
                 if self.actual_token.type != 'EOL':
                     raise ValueError("Esperado 'EOL' após bloco")
                 return If(Token('IF', 'if'), [condition, block, NoOp(Token('NOOP', 'noop'))])
@@ -1130,7 +1121,6 @@ def main():
         
         model.save(f"{path.split('.')[0]}.h5")
         with open(f"{path.split('.')[0]}.summary",'w') as fh:
-            # Pass the file handle in as a lambda function to make it callable
             model.summary(print_fn=lambda x: fh.write(x + '\n'))
         keras.utils.plot_model(model, 
                                to_file=f"{path.split('.')[0]}.png", 

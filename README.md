@@ -4,6 +4,10 @@
 
 O Raske é uma linguagem de programação desenvolvida especificamente para simplificar a criação e definição de arquiteturas de redes neurais de forma intuitiva e eficiente. Com o Raske, os desenvolvedores podem descrever a estrutura de suas redes neurais de maneira concisa e legível, sem a necessidade de lidar diretamente com a complexidade do código de implementação.
 
+### Slides
+
+Para acessar a apresentação em slides, clique [aqui](https://www.overleaf.com/read/mjnbbjtvgvtm#6af356).
+
 ### Características
 
 - **Sintaxe Simples**: A sintaxe da linguagem é intuitiva e fácil de aprender, permitindo que os desenvolvedores criem arquiteturas de redes neurais de forma rápida e eficaz.
@@ -15,7 +19,8 @@ O Raske é uma linguagem de programação desenvolvida especificamente para simp
 ```ebnf
 NEURAL_NETWORK   = "neural_network", '{', BLOCK, '}' ;
 BLOCK = { STATEMENT } ;
-STATEMENT        = { ASSIGNMENT | PRINT | WHILE | IF  | ADD_INPUT_LAYER |  ADD_DENSE_LAYER | ADD_CONV_LAYER | ADD_MAXPOOLING_LAYER | ADD_BATCH_NORMALIZATION_LAYER | ADD_DROPOUT_LAYER }, "\n" ;
+STATEMENT        = { ASSIGNMENT | PRINT | WHILE | IF  | ADD_INPUT_LAYER |  ADD_DENSE_LAYER | ADD_CONV_LAYER | ADD_MAXPOOLING_LAYER | ADD_BATCH_NORMALIZATION_LAYER | ADD_DROPOUT_LAYER | LOCAL_DECLARATION }, "\n" ;
+LOCAL_DECLARATION = "local", IDENTIFIER, [ "=", EXPRESSION ] ;
 ASSIGNMENT       = IDENTIFIER, '=', EXPRESSION ;
 PRINT            = "print", '(', EXPRESSION, ')' ;
 WHILE            = "while", "(", REL_EXP, ")", "{", "\n", { (STATEMENT)}, "}" ;
@@ -23,6 +28,7 @@ IF = "if", "(", REL_EXP, ")", "{", { STATEMENT }, "}", [ "else", "{", { STATEMEN
 
 ACTIVATION = "relu" | "sigmoid" | "softmax" | "tanh" | "linear";
 ADD_INPUT_LAYER = "add_input_layer", "(", NUMBER, ("λ"| NUMBER,),")";
+ADD_FLATTEN_LAYER = "add_flatten_layer", "(", ")";
 ADD_DENSE_LAYER = "add_dense_layer", "(", NUMBER, ACTIVATION,")";
 ADD_CONV_LAYER = "add_conv_layer", "(", NUMBER, NUMBER, NUMBER, ACTIVATION,")";
 ADD_MAXPOOLING_LAYER = "add_maxpooling_layer", "(", NUMBER,")";
