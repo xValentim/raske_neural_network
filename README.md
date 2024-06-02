@@ -140,3 +140,31 @@ neural_network{
 #### Output (png)
 
 ![neural_network_3.png](neural_network_3.png)
+
+
+#### Código
+
+```C
+neural_network{
+    add_input_layer(128, 128)
+    local i = 0
+    while (i < 5){
+        if (i < 2){
+            add_conv_layer(4, 4, 1, linear)
+        } else {
+            add_conv_layer(2, 2, 1, linear)
+        }
+        add_maxpooling_layer(2)
+        add_batch_normalization_layer()
+        i = i + 1
+    }
+    add_flatten_layer()
+    add_dropout_layer(50)
+    add_dense_layer(64, linear)
+    add_dense_layer(2, softmax)
+}
+```
+
+#### Output (png)
+
+![neural_network_5.png](neural_network_5.png)
